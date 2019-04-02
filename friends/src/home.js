@@ -1,4 +1,5 @@
 import React from 'react';
+import UpdateFriendForm from './UpdateFriendForm';
 
 function Home(props) {
 
@@ -7,12 +8,23 @@ function Home(props) {
 
 return (
 <div>
-   {props.friends.map(friends => (
-       <ul>
-       <li>{friends.name}</li>
-       <li>{friends.age}</li>
-       <li>{friends.email}</li>
-       </ul>
+   {props.friends.map(friend => (
+    <div>
+       
+    
+      <UpdateFriendForm name={friend.name}
+      age={friend.age}
+      email={friend.email}
+      id={friend.id}
+      key={friend.id}
+      updateFriend={props.updateFriend}
+       putSucessMessage={props.putSucessMessage}
+        putError={props.putError}
+        delete={props.delete}
+     />
+
+      </div>
+       
    ) )} 
 </div>
 )

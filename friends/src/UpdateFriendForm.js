@@ -8,13 +8,11 @@ class UpdateFriendForm extends React.Component {
 constructor(props) {
     super(props);
     this.state={
-        newFriend: {
-            name: "Billy",
-            age: 25,
-            email: "Bill@aol.com"
-
-        },
-   
+      
+        editing: false,
+        nameInput: this.props.name,
+        ageInput: this.props.age,
+        emailInput: this.props.email,
 
     };
 }
@@ -22,20 +20,22 @@ constructor(props) {
 
 
 
-handleChange = e => {
-this.setState({
-    newFriend: {
-        ...this.state.newFriend,
-        [e.target.name]: e.target.value
-    }
-});
-
-};
+handleChange = (e, type) => {
+    const key = type + 'Input';
+    this.setState({
+        
+         [key]: e.target.value
+       
+    });
+    
+    };
+    
 
 
 putMessage = e => {
     e.preventDefault();
-    this.props.updateFriend(this.state.newFriend, 2);
+    this.props.updateFriend(this.state.nameInput, this.state.ageInput, 
+        this.state.emailInput, this.props.id);
 };
 
 
@@ -43,41 +43,51 @@ putMessage = e => {
 render() {
 
     return (
+        <div>
+            <ul>
+                <li>{this.props.name}</li>
+                <li>{this.props.age}</li>
+                <li>{this.props.email}</li>
+            </ul>
+    
     <div className='friend-form'>
-    <h2>Update (Put) A Friend</h2>
-    <form>
+    <h2>Update A Friend (put)</h2>
+    <form >
         <input
         type="text"
         name="name"
         placeholder="name"
-        onChange={this.handleChange}
-        value={this.state.newFriend.name} />
+        onChange={(e) => this.handleChange(e, 'name')}
+        value={this.state.nameInput} />
 
         <input
         type="text"
         name="age"
         placeholder="age"
-        onChange={this.handleChange}
-        value={this.state.newFriend.age} />
+        onChange={(e) => this.handleChange(e, 'age')}
+        value={this.state.ageInput} />
 
         <input
         type="text"
         name="email"
         placeholder="email"
-        onChange={this.handleChange}
-        value={this.state.newFriend.email}/>
+        onChange={(e) => this.handleChange(e, 'email')}
+        value={this.state.emailInput}/>
          {this.props.putError ? (
             <ErrorMessage message={this.props.putError} />
           ) : null}
          
+
           {this.props.putSuccessMessage ? (
             <SuccessMessage message={this.props.putSuccessMessage} />
           ) : null}
          
-          <button type="submit"  onClick={this.putMessage.bind(this)}> Update Friend</button>
+          <button onClick={this.putMessage.bind(this)}> Update Friend</button>
+          <button onClick={() =>this.props.delete(this.props.id) }>Delete Friend</button>
 
     </form>
     
+    </div>
     </div>
     );
 }

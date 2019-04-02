@@ -14,11 +14,8 @@ import {
   withRouter
 } from 'react-router-dom';
 
-const clearedFriend = {
-   name: '',
-   age: '',
-   email:''
-}
+
+
 
 
 class App extends Component {
@@ -29,7 +26,7 @@ class App extends Component {
     this.state ={
      
      friends: [],
-     friend: clearedFriend,
+  
      error: "",
      postSuccessMessage: "",
      postError: "",
@@ -57,7 +54,7 @@ class App extends Component {
       });
   }
 
- 
+
 
 
   postFriendToServer = data => {
@@ -79,15 +76,21 @@ class App extends Component {
       });
   };
 
-  updateFriendOnServer = (data, id) => {
+  handleUpdate = (friends) => {
+    this.setState({
+      friends,
+    })
+  }
 
-    axios
-    .put(`http://localhost:5000/friends/form/${id}`, data)
+
+  updateFriendOnServer = (name, age, email, id) => {
+  axios
+    .put(`http://localhost:5000/friends/${id}`,{name, age:Number(age), email})
     .then(response => {
       console.log("putResolved:", response);
       console.log("putResolved:", response.data);
       this.setState({
-      
+        friends: response.data,
         putSuccessMessage: "you updated!",
         putError: "",
    
@@ -104,20 +107,35 @@ class App extends Component {
 };
  
 
-
+deleteFriend = id => {
+  axios
+    .delete(`http://localhost:5000/friends/${id}`)
+    .then(reponse => {
+      this.setState({
+        deleteSuccessMessage: "You deleted!",
+        deleteError: ""
+      });
+    })
+    .catch(err => {
+      this.setState({
+        deleteSuccessMessage: "",
+        deleteError: "Error deleting!"
+      })
+    })
+};
  
   render() {
     console.log('rendering App:', this.state.friends)
     return (
       
       <div className="App">
-    <Route  path="/" render={ props => <Home {...props} friends={this.state.friends}/>}/>
+    <Route  path="/" render={ props => <Home {...props} friends={this.state.friends} updateFriend={this.updateFriendOnServer} delete={this.deleteFriend} putSuccessMessage={this.state.putSuccessMessage} putError={this.state.putError}/>}/>
     
-   <Route  path="/form" render={props => <FriendForm {...props} postFriendToServer={this.postFriendToServer} 
+   <Route  path="/" render={props => <FriendForm {...props} postFriendToServer={this.postFriendToServer} 
       postSuccessMessage={this.state.postSuccessMessage} postError={this.state.postError}/>}/>
          
-         <Route  path="/form" render={props => <UpdateFriendForm {...props} updateFriend={this.updateFriendOnServer.bind(this)}
-         putSuccessMessage={this.state.putSuccessMessage} putError={this.state.putError} handleChanges={this.handleChanges} friend={this.state.friend}/>}/>
+         {/* <Route  path="/form" render={props => <UpdateFriendForm {...props} updateFriend={this.updateFriendOnServer.bind(this)}
+         putSuccessMessage={this.state.putSuccessMessage} putError={this.state.putError} handleUpdate={this.handleUpdate} friends={this.state.friends}/>}/> */}
          
         {/* <Route path="/friends/:id" render={props=> <SingleFriend {...props}/>}/>  */}
          </div>

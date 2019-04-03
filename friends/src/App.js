@@ -137,7 +137,8 @@ deleteFriend = id => {
       postSuccessMessage={this.state.postSuccessMessage} postError={this.state.postError}/>}/>
          
 <Route  path="/Editform" render={props => <UpdateFriendContainer {...props} updateFriend={this.updateFriendOnServer.bind(this)}
-         putSuccessMessage={this.state.putSuccessMessage} putError={this.state.putError} handleUpdate={this.handleUpdate} friends={this.state.friends}/>}/> 
+         putSuccessMessage={this.state.putSuccessMessage} delete={this.deleteFriend.bind(this)}
+         putError={this.state.putError} handleUpdate={this.handleUpdate} friends={this.state.friends}/>}/> 
   
         {/* <Route path="/friends/:id" render={props=> <SingleFriend {...props}/>}/>  */}
          </div>

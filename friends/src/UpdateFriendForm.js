@@ -11,12 +11,13 @@ constructor(props) {
     this.state={
       
         editing: false,
+      
         // nameInput: this.props.name,
         // ageInput: this.props.age,
-        // emailInput: this.props.email,
-        nameInput: this.props.name,
-        ageInput: this.props.age,
-        emailInput: this.props.email
+        // emailInput: this.props.email
+         name1: this.props.name,
+        age1: this.props.age,
+        email1: this.props.email
 
     };
 }
@@ -24,8 +25,19 @@ constructor(props) {
 
 
 
-handleChange = (e, input) => {
-    const key = input + 'Input';
+// handleChange = (e, input) => {
+//     const key = input + 'Input';
+//     this.setState({
+        
+//         [key]: e.target.value
+       
+//     });
+    
+//     };
+    
+
+    handleChange = (e, input) => {
+    const key = input+"1";
     this.setState({
         
         [key]: e.target.value
@@ -36,13 +48,21 @@ handleChange = (e, input) => {
     
 
 
+// putMessage = e => {
+//     e.preventDefault();
+//     this.props.updateFriend(this.state.nameInput, this.state.ageInput, 
+//         this.state.emailInput, this.props.id);
+// };
+
 putMessage = e => {
     e.preventDefault();
-    this.props.updateFriend(this.state.nameInput, this.state.ageInput, 
-        this.state.emailInput, this.props.id);
+    this.props.updateFriend(this.state.name1, this.state.age1, 
+        this.state.email1, this.props.id);
 };
 
-
+//must put () with event inside parenth for onChange so that it only invokes
+//the method when event occurs on it..& also passes allows you to pass through 
+//specific parameters in string form (can't really pass through e.target.name)
 
 render() {
 
@@ -57,21 +77,28 @@ render() {
         name="name"
         placeholder="name"
         onChange={(e) =>this.handleChange(e, 'name')}
-        value={this.state.nameInput} />
+        // value={this.state.nameInput} 
+          value={this.state.name1} 
+        />
 
         <input
         type="text"
         name="age"
         placeholder="age"
         onChange={(e) =>this.handleChange(e, 'age')}
-        value={this.state.ageInput} />
+        // value={this.state.ageInput}
+        value={this.state.age1}
+        />
 
         <input
         type="text"
         name="email"
         placeholder="email"
         onChange={(e) =>this.handleChange(e, 'email')}
-        value={this.state.emailInput}/>
+        // value={this.state.emailInput}
+        value={this.state.email1}
+        
+        />
          {this.props.putError ? (
             <ErrorMessage message={this.props.putError} />
           ) : null}

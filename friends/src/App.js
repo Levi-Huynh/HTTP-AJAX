@@ -4,8 +4,8 @@ import './App.css';
 import axios from 'axios';
 import Home from './home';
 import FriendForm from './FriendForm';
-import UpdateFriendForm from './UpdateFriendForm';
-
+import UpdateFriendContainer from './UpdateFriendContainer';
+import NavBar from './NavBar';
 
 import {
   BrowserRouter as Router,
@@ -129,14 +129,16 @@ deleteFriend = id => {
     return (
       
       <div className="App">
-    <Route  path="/" render={ props => <Home {...props} friends={this.state.friends} updateFriend={this.updateFriendOnServer} delete={this.deleteFriend} putSuccessMessage={this.state.putSuccessMessage} putError={this.state.putError}/>}/>
-    
-   <Route  path="/" render={props => <FriendForm {...props} postFriendToServer={this.postFriendToServer} 
+   <Route path="/" component={NavBar} />
+    <Route exact path="/" render={ props => <Home {...props} friends={this.state.friends} updateFriend={this.updateFriendOnServer} delete={this.deleteFriend} putSuccessMessage={this.state.putSuccessMessage} putError={this.state.putError}/>}/>
+  
+
+   <Route exact path="/AddForm" render={props => <FriendForm {...props} postFriendToServer={this.postFriendToServer} 
       postSuccessMessage={this.state.postSuccessMessage} postError={this.state.postError}/>}/>
          
-         {/* <Route  path="/form" render={props => <UpdateFriendForm {...props} updateFriend={this.updateFriendOnServer.bind(this)}
-         putSuccessMessage={this.state.putSuccessMessage} putError={this.state.putError} handleUpdate={this.handleUpdate} friends={this.state.friends}/>}/> */}
-         
+<Route  path="/Editform" render={props => <UpdateFriendContainer {...props} updateFriend={this.updateFriendOnServer.bind(this)}
+         putSuccessMessage={this.state.putSuccessMessage} putError={this.state.putError} handleUpdate={this.handleUpdate} friends={this.state.friends}/>}/> 
+  
         {/* <Route path="/friends/:id" render={props=> <SingleFriend {...props}/>}/>  */}
          </div>
     );
@@ -145,3 +147,18 @@ deleteFriend = id => {
 
 
 export default App;
+
+// {this.state.friends.map(friend => (
+
+//   <Route exact path="/form" render= {props => <UpdateFriendForm  name={friend.name}
+//     age={friend.age}
+//     email={friend.email}
+//     id={friend.id}
+//     key={friend.id} 
+//     updateFriend={this.updateFriendOnServer.bind(this)}
+//     putSucessMessage={this.state.putSucessMessage}
+//      putError={this.state.putError}
+//      delete={this.deleteFriend.bind(this)}/>}
+
+
+// ))}

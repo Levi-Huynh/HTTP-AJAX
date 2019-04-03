@@ -3,6 +3,7 @@ import ErrorMessage from "./ErrorMessage";
 import SuccessMessage from "./SuccessMessage";
 import axios from 'axios';
 import { Route } from 'react-router-dom';
+import FriendList from "./FriendList";
 
 class UpdateFriendForm extends React.Component {
 constructor(props) {
@@ -10,9 +11,12 @@ constructor(props) {
     this.state={
       
         editing: false,
+        // nameInput: this.props.name,
+        // ageInput: this.props.age,
+        // emailInput: this.props.email,
         nameInput: this.props.name,
         ageInput: this.props.age,
-        emailInput: this.props.email,
+        emailInput: this.props.email
 
     };
 }
@@ -20,11 +24,11 @@ constructor(props) {
 
 
 
-handleChange = (e, type) => {
-    const key = type + 'Input';
+handleChange = (e, input) => {
+    const key = input + 'Input';
     this.setState({
         
-         [key]: e.target.value
+        [key]: e.target.value
        
     });
     
@@ -44,12 +48,7 @@ render() {
 
     return (
         <div>
-            <ul>
-                <li>{this.props.name}</li>
-                <li>{this.props.age}</li>
-                <li>{this.props.email}</li>
-            </ul>
-    
+  
     <div className='friend-form'>
     <h2>Update A Friend (put)</h2>
     <form >
@@ -57,21 +56,21 @@ render() {
         type="text"
         name="name"
         placeholder="name"
-        onChange={(e) => this.handleChange(e, 'name')}
+        onChange={(e) =>this.handleChange(e, 'name')}
         value={this.state.nameInput} />
 
         <input
         type="text"
         name="age"
         placeholder="age"
-        onChange={(e) => this.handleChange(e, 'age')}
+        onChange={(e) =>this.handleChange(e, 'age')}
         value={this.state.ageInput} />
 
         <input
         type="text"
         name="email"
         placeholder="email"
-        onChange={(e) => this.handleChange(e, 'email')}
+        onChange={(e) =>this.handleChange(e, 'email')}
         value={this.state.emailInput}/>
          {this.props.putError ? (
             <ErrorMessage message={this.props.putError} />

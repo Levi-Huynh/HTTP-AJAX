@@ -62,10 +62,13 @@ class App extends Component {
       .post('http://localhost:5000/friends', data)
       .then(response => {
         console.log("resolved:", response);
+    
         this.setState({
           postSuccessMessage: "you posted!",
           postError: ""
         });
+        this.props.history.push('/');
+        window.location.reload();
       })
       .catch(err => {
         console.log("Rejected:", err );
@@ -95,6 +98,8 @@ class App extends Component {
         putError: "",
    
       });
+      this.props.history.push('/');
+      window.location.reload();
     
     })
     .catch(err => {
@@ -115,6 +120,9 @@ deleteFriend = id => {
         deleteSuccessMessage: "You deleted!",
         deleteError: ""
       });
+      this.props.history.push('/');
+      window.location.reload();
+    
     })
     .catch(err => {
       this.setState({

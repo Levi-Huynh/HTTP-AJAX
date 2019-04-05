@@ -18,16 +18,18 @@ class FriendForm extends React.Component {
 
 
 handleChange = e => {
-    this.setState({
+    e.persist();
+    let value = e.target.value;
+    this.setState(prevState => ({
         newFriend: {
-            ...this.state.newFriend,
-            [e.target.name]: e.target.value
+            ...prevState.newFriend,
+            [e.target.name]: value
         }
-    });
+      }));
 };
 
 postMessage = e => {
-    // e.preventDefault();
+ e.preventDefault();
     this.props.postFriendToServer(this.state.newFriend);
     this.setState({
         newFriend: {
@@ -36,7 +38,8 @@ postMessage = e => {
             email: ""
         }
     });
-    // window.location.reload();
+   
+  
 };
 
 render() {

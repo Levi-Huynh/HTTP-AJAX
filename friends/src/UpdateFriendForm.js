@@ -55,7 +55,7 @@ constructor(props) {
 // };
 
 putMessage = e => {
-    e.preventDefault();
+    // e.preventDefault();
     this.props.updateFriend(this.state.name1, this.state.age1, 
         this.state.email1, this.props.id);
 };

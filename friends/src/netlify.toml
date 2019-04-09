@@ -1,10 +1,10 @@
 [build]
-  base    = "./friends"
+  base    = "./friends/package.json"
   publish = "./friends/build"
   command = "yarn build"
 
 
     [[redirects]]
-  from = "/"
+  from = "/*"
   to = "/index.html"
   status = 200

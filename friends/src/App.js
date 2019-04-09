@@ -131,6 +131,15 @@ deleteFriend = id => {
       })
     })
 };
+
+cancelUpdate= (data) => {
+  var CancelToken = axios.CancelToken;
+var source = CancelToken.source();
+  axios.post('http://localhost:5000/friends',{data},{CancelToken: source.token} );
+  this.props.history.push('/');
+  window.location.reload();
+
+}
  
   render() {
     console.log('rendering App:', this.state.friends)
@@ -145,7 +154,7 @@ deleteFriend = id => {
       postSuccessMessage={this.state.postSuccessMessage} postError={this.state.postError}/>}/>
          
 <Route  path="/Editform" render={props => <UpdateFriendContainer {...props} updateFriend={this.updateFriendOnServer.bind(this)}
-         putSuccessMessage={this.state.putSuccessMessage} delete={this.deleteFriend.bind(this)}
+         putSuccessMessage={this.state.putSuccessMessage} delete={this.deleteFriend.bind(this)} cancel={this.cancelDelete}
          putError={this.state.putError} handleUpdate={this.handleUpdate} friends={this.state.friends}/>}/> 
   
         {/* <Route path="/friends/:id" render={props=> <SingleFriend {...props}/>}/>  */}

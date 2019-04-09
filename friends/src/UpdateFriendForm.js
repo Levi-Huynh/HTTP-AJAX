@@ -109,7 +109,9 @@ render() {
           ) : null}
          
           <button onClick={this.putMessage.bind(this)}> Update Friend</button>
-          <button onClick={() =>this.props.delete(this.props.id) }>Delete Friend</button>
+         <button onClick={() =>this.props.delete(this.props.id) }>Delete Friend</button>
+         <button onClick={() =>this.props.cancel(this.props.id) }>cancel new Friend</button>
+
 
     </form>
     

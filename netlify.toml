@@ -1,5 +1,5 @@
 [build]
-  base    = "./friends/package.json"
+  base    = "./friends"
   publish = "./friends/build"
   command = "yarn build"
 

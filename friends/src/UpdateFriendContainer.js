@@ -17,7 +17,8 @@ return (
       updateFriend={props.updateFriend}
        putSucessMessage={props.putSucessMessage}
         putError={props.putError}
-        delete={props.delete} />
+        delete={props.delete} 
+        cancel={props.cancel}/>
     
       
 

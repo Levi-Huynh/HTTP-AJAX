@@ -73,6 +73,7 @@ render() {
             <SuccessMessage message={this.props.putSuccessMessage} />
           ) : null}
         <button onClick={this.postMessage} type="submit"> Add Friend</button>
+      
         </form>
         </div>
     )}
